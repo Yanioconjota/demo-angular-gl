@@ -9,7 +9,7 @@ import { AppRoutingModule } from '../app-routing.module';
 @NgModule({
   declarations: [
     ProductsComponent,
-    ProductComponent
+    ProductComponent,
   ],
   imports: [
     CommonModule,
