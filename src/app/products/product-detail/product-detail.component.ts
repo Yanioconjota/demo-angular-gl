@@ -12,16 +12,14 @@ import { ProductsService } from 'src/app/services/products.service';
 export class ProductDetailComponent implements OnInit, OnDestroy {
 
   subscriber!: Subscription;
-  product!: Product;
+  product!: Product | undefined;
   productId!: number;
 
   constructor(private routeParams: ActivatedRoute,
-              private router: Router,
               private productsService: ProductsService) { }
 
   ngOnInit(): void {
     this.productId = +this.routeParams.snapshot.url[1].path;
-    console.log(this.productId);
     this.subscriber = this.productsService.getProductById(this.productId)
         .subscribe(product => this.product = product);
   }

@@ -24,8 +24,8 @@ export class ProductsService {
     return of(this.products);
   }
 
-  getProductById(id: number): Observable<Product> {
-    return of(this.products[id]);
+  getProductById(id: number): Observable<Product | undefined> {
+    return of(this.products.find(p => p.id === id));
   }
 
   deleteProduct(id: number): Observable<Product[]> {
