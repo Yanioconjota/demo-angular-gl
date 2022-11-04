@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ProductsComponent } from './products/products.component';
 import { ProductComponent } from './product/product.component';
 import { AppRoutingModule } from '../app-routing.module';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 
 
@@ -10,6 +11,7 @@ import { AppRoutingModule } from '../app-routing.module';
   declarations: [
     ProductsComponent,
     ProductComponent,
+    ProductDetailComponent,
   ],
   imports: [
     CommonModule,

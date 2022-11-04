@@ -1,8 +1,11 @@
 <div class="container">
   <div class="row">
-    <div class="col-12">
+    <div class="col-12" *ngIf="products.length > 0">
       <h1 class="mt-3">Welcome to our products site</h1>
       <app-product [products]="products"></app-product>
+    </div>
+    <div class="col-12" *ngIf="products.length <= 0">
+      <h1 class="mt-3">There's nothing to see here</h1>
     </div>
   </div>
 </div>
