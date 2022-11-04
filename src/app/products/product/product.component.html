@@ -1,6 +1,6 @@
 <div class="row mt-4">
   <div *ngFor="let product of products" class="col-3">
-    <div class="card">
+    <div class="card animate__animated animate__bounceInLeft">
       <a href="javascript:void(0)" [routerLink]="'/products/'+ product.id"  class="card-body">
         <img [src]="product.img" [alt]="product.name" *ngIf="product.img" class="mb-3">
         <h4>{{ product.name }}</h4>

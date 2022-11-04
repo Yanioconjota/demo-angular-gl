@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { debounceTime } from "rxjs/operators";
 import { Product } from 'src/app/models/product.model';
 import { ProductsService } from 'src/app/services/products.service';
 
@@ -17,6 +18,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
    this.subscriber = this.productsService.getProducts()
+       .pipe(debounceTime(1000))
        .subscribe(products => this.products = products);
   }
 

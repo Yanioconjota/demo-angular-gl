@@ -1,9 +1,9 @@
 <div class="container" *ngIf="product">
   <div class="row mt-3">
     <div class="col-md-3 col-12" *ngIf="product.img">
-      <img [src]="product.img" alt="product.name"/>
+      <img [src]="product.img" alt="product.name" class="animate__animated animate__bounceInUp"/>
     </div>
-    <div class="col-12" [ngClass]="{'col-md-9': product.img}">
+    <div class="col-12 animate__animated animate__bounceInUp" [ngClass]="{'col-md-9': product.img}">
       <h2>{{ product.name }}</h2>
       <p>{{ product.description }}</p>
       <p>{{ product.id }}</p>
@@ -13,7 +13,7 @@
 
 <div class="container" *ngIf="!product">
   <div class="row mt-3">
-    <div class="col-12">
+    <div class="col-12 animate__animated animate__bounceInUp">
       <h1>404</h1>
       <p>Product not found</p>
     </div>
