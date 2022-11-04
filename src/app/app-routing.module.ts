@@ -4,8 +4,8 @@ import { ProductComponent } from './products/product/product.component';
 import { ProductsComponent } from './products/products/products.component';
 
 const routes: Routes = [
-  {path: '/products', component: ProductsComponent},
-  {path: '/products/:id', component: ProductComponent},
+  {path: 'products', component: ProductsComponent},
+  {path: 'products/:id', component: ProductComponent},
   { path: '**', redirectTo: '' }
 ];
 
