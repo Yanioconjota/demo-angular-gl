@@ -1,8 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { debounceTime } from "rxjs/operators";
-import { Product } from 'src/app/products/models/product.model';
-import { ProductsService } from 'src/app/products/services/products.service';
 import { Store } from '@ngrx/store';
 import { getFetchProductsStatus } from '../state/products.selectors';
 import { Observable } from 'rxjs';
