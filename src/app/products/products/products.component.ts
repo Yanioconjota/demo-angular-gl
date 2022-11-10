@@ -1,8 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { debounceTime } from "rxjs/operators";
-import { Product } from 'src/app/models/product.model';
-import { ProductsService } from 'src/app/services/products.service';
+import { Product } from 'src/app/products/models/product.model';
+import { ProductsService } from 'src/app/products/services/products.service';
+import { Store } from '@ngrx/store';
+import { getFetchProductsStatus } from '../state/products.selectors';
+import { Observable } from 'rxjs';
+import { fetchProducts } from '../state/products.actions';
 
 @Component({
   selector: 'app-products',
@@ -12,20 +16,22 @@ import { ProductsService } from 'src/app/services/products.service';
 export class ProductsComponent implements OnInit, OnDestroy {
 
   subscriber!: Subscription;
-  products!: Product[];
+  //products!: Product[];
+  status$: Observable<string> = this.store.select(getFetchProductsStatus);
 
-  constructor(private productsService: ProductsService) { }
+
+  constructor(private store: Store<any>) {
+    console.log('constructor');
+  }
 
   ngOnInit(): void {
-   this.subscriber = this.productsService.getProducts()
-       .pipe(debounceTime(1000))
-       .subscribe(products => this.products = products);
+    console.log('on init');
+    this.status$.subscribe()
+    this.store.dispatch(fetchProducts());
   }
 
   ngOnDestroy(): void {
-    if (this.subscriber) {
-      this.subscriber.unsubscribe();
-    }
+
   }
 
 
