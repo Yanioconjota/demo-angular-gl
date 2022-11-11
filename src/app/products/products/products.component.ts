@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { getFetchProductsStatus } from '../state/products.selectors';
-import { Observable } from 'rxjs';
 import { fetchProducts } from '../state/products.actions';
+import { AppState } from '../../app.state';
 
 @Component({
   selector: 'app-products',
@@ -17,13 +17,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
   status$: Observable<string> = this.store.select(getFetchProductsStatus);
 
 
-  constructor(private store: Store<any>) {
-    console.log('constructor');
+  constructor(private store: Store<AppState>) {
   }
 
   ngOnInit(): void {
-    console.log('on init');
-    this.status$.subscribe()
     this.store.dispatch(fetchProducts());
   }
 
