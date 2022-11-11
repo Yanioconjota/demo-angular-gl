@@ -9,6 +9,8 @@ import { productsReducer } from './products/state/products.reducer';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+import { ProductsEffects } from './products/state/products.effects';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { environment } from '../environments/environment';
     StoreModule.forRoot({
       products: productsReducer
     }),
+    EffectsModule.forRoot([ProductsEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,

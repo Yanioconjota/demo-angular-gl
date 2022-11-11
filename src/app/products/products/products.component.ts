@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { getFetchProductsStatus } from '../state/products.selectors';
+import { getFetchProductsStatus, selectProducts, getProducts } from '../state/products.selectors';
 import { fetchProducts } from '../state/products.actions';
 import { AppState } from '../../app.state';
+import { Product } from '../models/product.model';
 
 @Component({
   selector: 'app-products',
@@ -13,7 +14,7 @@ import { AppState } from '../../app.state';
 export class ProductsComponent implements OnInit, OnDestroy {
 
   subscriber!: Subscription;
-  //products!: Product[];
+  products: Product[] = [];
   status$: Observable<string> = this.store.select(getFetchProductsStatus);
 
 
@@ -22,10 +23,15 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.store.dispatch(fetchProducts());
+    this.subscriber = this.store.select(getProducts)
+        .subscribe((products: Product[]) => {
+          console.log(products);
+          this.products = products;
+        })
   }
 
   ngOnDestroy(): void {
-
+    this.subscriber.unsubscribe();
   }
 
 
