@@ -1,4 +1,4 @@
-import { FetchStatus } from './../../shared/enums/status.enum';
+import { FetchStatus } from 'src/app/shared/enums/status.enum';
 import { createReducer, on } from '@ngrx/store';
 import * as productActions from './products.actions';
 import { Product } from 'src/app/products/models/product.model';
@@ -42,6 +42,8 @@ export const productsReducer = createReducer(initialState,
         status: FetchStatus.Completed,
         error: payload.err
       }
-    })
+    }),
+
+
 
 );

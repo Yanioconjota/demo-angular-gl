@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { getFetchProductsStatus, selectProducts, getProducts } from '../state/products.selectors';
-import { fetchProducts } from '../state/products.actions';
+import { getFetchProductsStatus, getProducts } from './store/products.selectors';
+import { fetchProducts } from './store/products.actions';
 import { AppState } from '../../app.state';
 import { Product } from '../models/product.model';
 

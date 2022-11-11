@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, catchError, mergeMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { ProductsService } from '../services/products.service';
+import { ProductsService } from 'src/app/products/services/products.service';
 import { Product } from 'src/app/products/models/product.model';
 import * as productsActions from './products.actions';
 
@@ -23,5 +23,7 @@ export class ProductsEffects {
         )
       )
     )
-  )
+  );
+
+
 }
