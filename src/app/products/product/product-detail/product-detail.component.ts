@@ -1,10 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription, Observable } from 'rxjs';
 import { AppState } from 'src/app/app.state';
 import { Product } from 'src/app/products/models/product.model';
-import { ProductsService } from 'src/app/products/services/products.service';
 import { fetchProductById } from '../store/product.actions';
 import * as productSelector from '../store/product.selectors';
 
@@ -32,8 +31,6 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
           console.log(product);
           this.product = product;
         })
-    // this.subscriber = this.productsService.getProductById(this.productId)
-    //     .subscribe(product => this.product = product);
   }
 
   ngOnDestroy(): void {

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Product } from 'src/app/products/models/product.model';
 import { ProductsService } from '../../services/products.service';
 import { map, mergeMap, catchError, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
