@@ -1,8 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Subscription, Observable } from 'rxjs';
+import { AppState } from 'src/app/app.state';
 import { Product } from 'src/app/products/models/product.model';
 import { ProductsService } from 'src/app/products/services/products.service';
+import { fetchProductById } from '../store/product.actions';
+import * as productSelector from '../store/product.selectors';
 
 @Component({
   selector: 'app-product-detail',
@@ -12,16 +16,24 @@ import { ProductsService } from 'src/app/products/services/products.service';
 export class ProductDetailComponent implements OnInit, OnDestroy {
 
   subscriber!: Subscription;
-  product!: Product | undefined;
+  product!: Product | null;
   productId!: number;
+  status$: Observable<string> = this.store.select(productSelector.getFetchProductStatus);
 
   constructor(private routeParams: ActivatedRoute,
-              private productsService: ProductsService) { }
+              private store: Store<AppState>) { }
 
   ngOnInit(): void {
     this.productId = +this.routeParams.snapshot.url[1].path;
-    this.subscriber = this.productsService.getProductById(this.productId)
-        .subscribe(product => this.product = product);
+    console.log(this.productId);
+    this.store.dispatch(fetchProductById({id: this.productId}));
+    this.subscriber = this.store.select(productSelector.getFetchProduct)
+        .subscribe((product) => {
+          console.log(product);
+          this.product = product;
+        })
+    // this.subscriber = this.productsService.getProductById(this.productId)
+    //     .subscribe(product => this.product = product);
   }
 
   ngOnDestroy(): void {

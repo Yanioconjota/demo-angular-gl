@@ -11,6 +11,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { ProductsEffects } from './products/products/store/products.effects';
+import { ProductEffect } from './products/product/store/product.effects';
+import { productReducer } from './products/product/store/product.reducer';
 
 @NgModule({
   declarations: [
@@ -22,9 +24,10 @@ import { ProductsEffects } from './products/products/store/products.effects';
     ProductsModule,
     AppRoutingModule,
     StoreModule.forRoot({
-      products: productsReducer
+      products: productsReducer,
+      product: productReducer
     }),
-    EffectsModule.forRoot([ProductsEffects]),
+    EffectsModule.forRoot([ProductsEffects, ProductEffect]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,

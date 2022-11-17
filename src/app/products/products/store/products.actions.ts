@@ -10,8 +10,4 @@ export const fetchProductsSuccess = createAction('[Products Component] Fetch pro
 //Also triggered by ProductsEffects and receives the error to be updated
 export const fetchProductsError = createAction('[Products Component] Fetch products error', props<{ payload: any }>());
 
-export const fetchProductById = createAction('[Products Component] Fetch product by Id', props<{ id: number }>());
-
-export const fetchProductByIdSuccess = createAction('[Products Component] Fetch product by Id Success', props<{ product: Product }>());
-
-export const fetchProductByIdError = createAction('[Products Component] Fetch product by Id error', props<{ payload: any }>());
+export const deleteProduct = createAction('[Products Component] Delete product', props<{ id: number }>());

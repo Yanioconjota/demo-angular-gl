@@ -20,15 +20,15 @@ export class ProductsService {
 
   constructor() { }
 
-  getProducts(): Observable<Product[]> {
+  getProducts() {
     return of(this.products);
   }
 
-  getProductById(id: number): Observable<Product | undefined> {
+  getProductById(id: number) {
     return of(this.products.find(p => p.id === id));
   }
 
-  deleteProduct(id: number): Observable<Product[]> {
+  deleteProduct(id: number) {
     this.products = this.products.filter(p => p.id !== id);
     return of(this.products);
   }

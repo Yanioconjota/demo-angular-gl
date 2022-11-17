@@ -25,5 +25,17 @@ export class ProductsEffects {
     )
   );
 
+  deleteProduct$ = createEffect(() => {
+    return this.actions$.pipe(
+        ofType(productsActions.deleteProduct),
+        mergeMap((action) => this.productsService.deleteProduct(action.id)
+          .pipe(
+            tap( data => console.log('getProducts effect: ', data)),
+            map((products: Product[]) => productsActions.fetchProductsSuccess({ items: products })),
+          catchError( err => of(productsActions.fetchProductsError({ payload: err })))
+          )
+    ));
+  });
+
 
 }
