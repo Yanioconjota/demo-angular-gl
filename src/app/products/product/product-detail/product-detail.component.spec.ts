@@ -8,7 +8,7 @@ import { ProductDetailComponent } from './product-detail.component';
 fdescribe('ProductDetailComponent', () => {
   let component: ProductDetailComponent;
   let fixture: ComponentFixture<ProductDetailComponent>;
-  //let store: MockStore;
+  let store: MockStore;
 
   beforeEach(waitForAsync (() => {
     TestBed.configureTestingModule({
@@ -29,7 +29,12 @@ fdescribe('ProductDetailComponent', () => {
         provideMockStore({
           selectors: [
             {
-              selector: getFetchProduct, value: {}
+              selector: getFetchProduct, value: {
+                id: 1,
+                name: 'toaster',
+                description: 'something',
+                img: ''
+              }
             },
             {
               selector: getFetchProductStatus, value: 'COMPLETED'
@@ -45,8 +50,8 @@ fdescribe('ProductDetailComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ProductDetailComponent);
     component = fixture.componentInstance;
-    //store = TestBed.inject(MockStore);
-    //fixture.detectChanges();
+    store = TestBed.inject(MockStore);
+    fixture.detectChanges();
   });
 
   it('should create', () => {
