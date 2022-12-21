@@ -23,6 +23,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
               private store: Store<AppState>) { }
 
   ngOnInit(): void {
+    console.log(this.routeParams.snapshot);
     this.productId = +this.routeParams.snapshot.url[1].path;
     console.log(this.productId);
     this.store.dispatch(fetchProductById({id: this.productId}));
