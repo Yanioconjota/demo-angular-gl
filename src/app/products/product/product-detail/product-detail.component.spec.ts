@@ -2,13 +2,16 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { FetchStatus } from 'src/app/shared/enums/status.enum';
 import { getFetchProduct, getFetchProductStatus } from '../store/product.selectors';
 import { ProductDetailComponent } from './product-detail.component';
 
-fdescribe('ProductDetailComponent', () => {
+describe('ProductDetailComponent', () => {
   let component: ProductDetailComponent;
   let fixture: ComponentFixture<ProductDetailComponent>;
-  let store: MockStore;
+
+  const mockedSnapshot = { snapshot: { url: [{ path: 1 }] } };
+  const mockedItem = { id: 1, name: 'Toaster', description: 'A regular toaster', img: '../../assets/img/toaster.png' };
 
   beforeEach(waitForAsync (() => {
     TestBed.configureTestingModule({
@@ -16,29 +19,12 @@ fdescribe('ProductDetailComponent', () => {
       providers: [
         {
           provide: ActivatedRoute,
-          useValue: {
-            snapshot: {
-              url: [
-                {
-                  path: 1
-                }
-              ]
-            }
-          }
+          useValue: mockedSnapshot
         },
         provideMockStore({
           selectors: [
-            {
-              selector: getFetchProduct, value: {
-                id: 1,
-                name: 'toaster',
-                description: 'something',
-                img: ''
-              }
-            },
-            {
-              selector: getFetchProductStatus, value: 'COMPLETED'
-            }
+            { selector: getFetchProduct, value: mockedItem },
+            { selector: getFetchProductStatus, value: FetchStatus.Completed }
           ]
         }),
         RouterTestingModule
@@ -50,8 +36,6 @@ fdescribe('ProductDetailComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ProductDetailComponent);
     component = fixture.componentInstance;
-    store = TestBed.inject(MockStore);
-    fixture.detectChanges();
   });
 
   it('should create', () => {
