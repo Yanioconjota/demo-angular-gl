@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 import { FetchStatus } from 'src/app/shared/enums/status.enum';
 import { getFetchProduct, getFetchProductStatus } from '../store/product.selectors';
 import { ProductDetailComponent } from './product-detail.component';

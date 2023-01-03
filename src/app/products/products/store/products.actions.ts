@@ -8,6 +8,6 @@ export const fetchProducts = createAction('[Products Component] Fetch products')
 export const fetchProductsSuccess = createAction('[Products Component] Fetch products Success', props<{ items: Product[] }>());
 
 //Also triggered by ProductsEffects and receives the error to be updated
-export const fetchProductsError = createAction('[Products Component] Fetch products error', props<{ payload: any }>());
+export const fetchProductsError = createAction('[Products Component] Fetch products error', props<{ payload: string }>());
 
 export const deleteProduct = createAction('[Products Component] Delete product', props<{ id: number }>());

@@ -40,7 +40,7 @@ export const productsReducer = createReducer(initialState,
       return {
         ...state,
         status: FetchStatus.Completed,
-        error: payload.err
+        error: payload
       }
     }),
 

@@ -41,9 +41,8 @@ describe('ProductComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  //Is called but is not deleting...
   it('should dispatch delete', () => {
-    //By chaining the spy with and.callThrough, the spy will still track all calls to it but in addition it will delegate to the actual implementation.??
+    //By chaining the spy with and.callThrough, the spy will still track all calls to it but in addition it will delegate to the actual implementation.
     const storeSpy = spyOn(store, 'dispatch').and.callThrough();
     component.delete(1);
     fixture.detectChanges();
