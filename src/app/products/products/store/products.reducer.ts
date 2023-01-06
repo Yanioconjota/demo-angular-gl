@@ -6,13 +6,13 @@ import { Product } from 'src/app/products/models/product.model';
 export interface ProductsState {
     items: Product[];
     status: FetchStatus.Pending | FetchStatus.InProgress | FetchStatus.Completed;
-    error: string | undefined;
+    error: string | null;
 }
 
 export const initialState: ProductsState = {
    items: [],
    status: FetchStatus.Pending,
-   error: undefined,
+   error: null,
 }
 
 //The reducer is the one in charge of changing the state to a new one according to the action triggered

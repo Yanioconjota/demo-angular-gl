@@ -20,9 +20,9 @@ describe('Test products reducer', () => {
     const initialState = {
       items: [],
       status: FetchStatus.Pending,
-      error: undefined,
+      error: null,
     };
-
+    //Since there is no state we use undefined
     expect(productsReducer(undefined, {type: ''})).toEqual(initialState);
   });
 
@@ -30,7 +30,7 @@ describe('Test products reducer', () => {
     const state = {
       items: [],
       status: FetchStatus.InProgress,
-      error: undefined,
+      error: null,
     };
 
     expect(productsReducer(undefined, productsActions.fetchProducts)).toEqual(state);
