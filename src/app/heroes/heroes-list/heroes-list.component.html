@@ -1,0 +1,9 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 mt-4">
+      <input #newHero type="text" (keyup.enter)="addHero(newHero.value)" placeholder="Enter a new hero">
+      <button (click)="addHero(newHero.value)">Add Hero</button>
+      <app-hero [data]="heroes"></app-hero>
+    </div>
+  </div>
+</div>

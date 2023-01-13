@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { ProductsModule } from './products/products.module';
+import { HeroesModule } from './heroes/heroes.module';
 import { productsReducer } from './products/products/store/products.reducer';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -22,6 +23,7 @@ import { productReducer } from './products/product/store/product.reducer';
     BrowserModule,
     SharedModule,
     ProductsModule,
+    HeroesModule,
     AppRoutingModule,
     StoreModule.forRoot({
       products: productsReducer,
