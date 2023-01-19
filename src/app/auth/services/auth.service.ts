@@ -14,7 +14,7 @@ export class AuthService {
               private firestore: AngularFirestore) { }
 
   createUser( name: string, email: string, password: string ) {
-    //returns a promis with a firebase user
+    //returns a promise with a firebase user
     return this.auth.createUserWithEmailAndPassword(email, password)
       .then(({user}) => {
         const newUser = new User(

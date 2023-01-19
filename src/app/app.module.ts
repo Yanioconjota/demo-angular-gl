@@ -20,6 +20,7 @@ import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 //Components
 import { AppComponent } from './app.component';
+import { AuthEffect } from './auth/store/auth.effects';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { AppComponent } from './app.component';
       products: productsReducer,
       product: productReducer
     }),
-    EffectsModule.forRoot([ProductsEffects, ProductEffect]),
+    EffectsModule.forRoot([ProductsEffects, ProductEffect, AuthEffect]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,

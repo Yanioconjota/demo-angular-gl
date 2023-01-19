@@ -20,26 +20,34 @@ export const userInitialState: UserState = {
 export const authReducer = createReducer(
   userInitialState,
 
-  on(AuthActions.login, (state, { email, password }) => ({
+  on(AuthActions.loadUser, (state, { email, password }) => ({
     ...state,
     status: FetchStatus.InProgress,
     email,
     password
   })),
 
-  on(AuthActions.loginSucess, (state, { user }) => ({
+  on(AuthActions.loadUserSucess, (state, { user }) => ({
     ...state,
     status: FetchStatus.Completed,
     user: {...user}
   })),
 
-  on(AuthActions.loginError, (state, { error }) => ({
-      ...state,
-      status: FetchStatus.Completed,
-      error: {
-        url: error.url,
-        name: error.name,
-        message: error.message
-      }
-    })),
+  on(AuthActions.loadUserError, (state, { error }) => ({
+    ...state,
+    status: FetchStatus.Completed,
+    error: {
+      url: error.url,
+      name: error.name,
+      message: error.message
+    }
+  })),
+
+  on(AuthActions.createUser, (state, { name, email, password }) => ({
+    ...state,
+    status: FetchStatus.InProgress,
+    name,
+    email,
+    password
+  })),
 )
