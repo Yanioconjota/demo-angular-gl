@@ -14,10 +14,11 @@ import { EffectsModule } from '@ngrx/effects';
 import { ProductsEffects } from './products/products/store/products.effects';
 import { ProductEffect } from './products/product/store/product.effects';
 import { productReducer } from './products/product/store/product.reducer';
+import { AngularFireModule } from '@angular/fire/compat';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +35,9 @@ import { productReducer } from './products/product/store/product.reducer';
       maxAge: 25,
       logOnly: environment.production,
       autoPause: true
-    })
+    }),
+
+    AngularFireModule.initializeApp(environment.firebase),
   ],
   providers: [],
   bootstrap: [AppComponent]
