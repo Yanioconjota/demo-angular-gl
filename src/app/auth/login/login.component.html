@@ -1,1 +1,52 @@
-<p>login works!</p>
+<div class="page-body-wrapper full-page-wrapper auth-page">
+  <div class="content-wrapper d-flex align-items-center auth register-bg-1 theme-one">
+    <div class="row w-100">
+      <div class="col-lg-4 mx-auto">
+        <h2 class="text-center mb-4">Login</h2>
+        <div class="auto-form-wrapper">
+          <form [formGroup]="loginForm">
+
+            <div class="form-group">
+              <div class="input-group">
+                <input type="email" class="form-control" placeholder="Email" formControlName="email">
+                <div class="input-group-append">
+                  <span class="input-group-text">
+                    <i *ngIf="showError('email')" [ngClass]="iconError('email')" class="fa"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group">
+                <input type="password" class="form-control" placeholder="Password" formControlName="password">
+                <div class="input-group-append">
+                  <span class="input-group-text">
+                    <i *ngIf="showError('password')" [ngClass]="iconError('password')" class="fa"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <button class="btn btn-primary submit-btn btn-block" (click)="login()" type="button"
+                [disabled]="loginForm.invalid">
+                <span *ngIf="!loading">Login</span>
+                <span *ngIf="loading && loginForm.valid">
+                  <i class="fa fa-sync fa-spin mr-1"></i>
+                  Please wait...
+                </span>
+              </button>
+            </div>
+            <div class="text-block text-center my-3">
+              <span class="text-small font-weight-semibold">You don't have an account?</span>
+              <br>
+              <a routerLink="/register" class="text-black text-small">Register</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- content-wrapper ends -->
+</div>

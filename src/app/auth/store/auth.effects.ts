@@ -6,7 +6,7 @@ import { from, of } from "rxjs";
 import { UiMessagesService } from "src/app/shared/services/ui-messages.service";
 import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { AngularFirestore } from "@angular/fire/compat/firestore";
-import { register, registerFailure, registerSuccess } from "./auth.actions";
+import { login, loginFailure, loginSuccess, register, registerFailure, registerSuccess } from "./auth.actions";
 import { AuthedUser, Authenticate } from "../models/auth.model";
 
 @Injectable()
@@ -20,12 +20,44 @@ export class AuthEffect {
               private customMessage: UiMessagesService) {}
 
 
+  login$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(login),
+      map(action => action.auth),
+      switchMap((auth: Authenticate) =>
+        from(this.authService.auth.signInWithEmailAndPassword(auth.email, auth.password))
+        .pipe(
+          map(authedUser => {
+
+            const user: AuthedUser = {
+              displayName: authedUser?.user?.displayName ?? null,
+              email: authedUser?.user?.email ?? null,
+              emailVerified: authedUser?.user?.emailVerified ?? false,
+              phoneNumber: authedUser?.user?.phoneNumber ?? null,
+              photoUrl: authedUser?.user?.photoURL ?? null,
+              refreshToken: authedUser?.user?.refreshToken ?? null,
+              uid: authedUser?.user?.uid ?? null
+            };
+
+            return loginSuccess({ authedUser: user });
+          }),
+          catchError(error => {
+            console.log(error);
+            this.customMessage.customModal(error.code, 'Register error!', 'warning');
+            return of(loginFailure({ error: error.code }))
+          })
+        )
+      )
+    )
+  );
+
   register$ = createEffect(() =>
     this.actions$.pipe(
       ofType(register),
       map(action => action.auth),
       switchMap((auth: Authenticate) =>
-        from(this.authService.auth.createUserWithEmailAndPassword(auth.email, auth.password)).pipe(
+        from(this.authService.auth.createUserWithEmailAndPassword(auth.email, auth.password))
+        .pipe(
           map(authedUser => {
 
             const user: AuthedUser = {
@@ -44,10 +76,10 @@ export class AuthEffect {
           catchError(error => {
             console.log(error);
             this.customMessage.customModal(error.code, 'Register error!', 'warning');
-            return of(registerFailure({ error }))
+            return of(registerFailure({ error: error.code }))
           })
         )
       )
     )
-    );
+  );
 }
