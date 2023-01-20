@@ -4,7 +4,7 @@
       <div class="col-lg-4 mx-auto">
         <h2 class="text-center mb-4">Register</h2>
         <div class="auto-form-wrapper">
-          <form [formGroup]="registerForm" (submit)="createUser()">
+          <form [formGroup]="registerForm">
 
             <div class="form-group">
               <div class="input-group">
@@ -46,7 +46,9 @@
             </div>
 
             <div class="form-group">
-              <button class="btn btn-primary submit-btn btn-block" type="submit" [disabled]="registerForm.invalid">
+              <button class="btn btn-primary submit-btn btn-block"
+              (click)="createUser()"
+              type="button" [disabled]="registerForm.invalid">
                 <span *ngIf="!loading">Create account</span>
                 <span *ngIf="loading && registerForm.valid">
                   <i class="fa fa-sync fa-spin mr-1"></i>

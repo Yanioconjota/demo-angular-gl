@@ -1,53 +1,40 @@
-import { FetchStatus } from 'src/app/shared/enums/status.enum';
-import { User } from '../models/user.model';
 import { createReducer, on } from '@ngrx/store';
-import * as AuthActions from './auth.actions';
+import * as authActions from './auth.actions';
+import { AuthState } from '../models/auth.model';
 
-export interface UserState {
-    id: string | null,
-    user: User | null,
-    status: FetchStatus.Pending | FetchStatus.InProgress | FetchStatus.Completed,
-    error: any
-}
-
-export const userInitialState: UserState = {
-  id: null,
-  user: null,
-  status: FetchStatus.Pending,
-  error: null
-}
+export const initialState: AuthState = {
+    error: null,
+    isAuthenticated: false,
+    isPending: false,
+    displayName: null,
+    email: null,
+    emailVerified: false,
+    phoneNumber: null,
+    photoUrl: null,
+    refreshToken: null,
+    uid: null,
+};
 
 export const authReducer = createReducer(
-  userInitialState,
-
-  on(AuthActions.loadUser, (state, { email, password }) => ({
-    ...state,
-    status: FetchStatus.InProgress,
-    email,
-    password
-  })),
-
-  on(AuthActions.loadUserSucess, (state, { user }) => ({
-    ...state,
-    status: FetchStatus.Completed,
-    user: {...user}
-  })),
-
-  on(AuthActions.loadUserError, (state, { error }) => ({
-    ...state,
-    status: FetchStatus.Completed,
-    error: {
-      url: error.url,
-      name: error.name,
-      message: error.message
-    }
-  })),
-
-  on(AuthActions.createUser, (state, { name, email, password }) => ({
-    ...state,
-    status: FetchStatus.InProgress,
-    name,
-    email,
-    password
-  })),
-)
+    initialState,
+    // Login & Register
+    on(authActions.login, authActions.register, state => ({
+        ...state,
+        isPending: true
+    })),
+    on(authActions.loginFailure, authActions.registerFailure, (state, { error }) => ({
+        ...state,
+        error,
+        isPending: false
+    })),
+    on(authActions.loginSuccess, authActions.registerSuccess, (state, { authedUser }) => ({
+        ...state,
+        ...authedUser,
+        isAuthenticated: true,
+        isPending: false,
+    })),
+    // Logout
+    on(authActions.logout, () => ({
+        ...initialState
+    })),
+);

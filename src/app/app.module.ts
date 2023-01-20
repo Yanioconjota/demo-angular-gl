@@ -6,21 +6,24 @@ import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './auth/auth.module';
 import { ProductsModule } from './products/products.module';
 import { HeroesModule } from './heroes/heroes.module';
-//NgRx
-import { productsReducer } from './products/products/store/products.reducer';
+//NgRx modules
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+//NgRx reducers
+import { productsReducer } from './products/products/store/products.reducer';
+import { productReducer } from './products/product/store/product.reducer';
+import { authReducer } from './auth/store/auth.reducer';
+//NgRx effects
 import { ProductsEffects } from './products/products/store/products.effects';
 import { ProductEffect } from './products/product/store/product.effects';
-import { productReducer } from './products/product/store/product.reducer';
-import { EffectsModule } from '@ngrx/effects';
+import { AuthEffect } from './auth/store/auth.effects';
 //Environments
 import { environment } from '../environments/environment';
 //Firebase
 import { AngularFireModule } from '@angular/fire/compat';
 //Components
 import { AppComponent } from './app.component';
-import { AuthEffect } from './auth/store/auth.effects';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,8 @@ import { AuthEffect } from './auth/store/auth.effects';
     AuthModule,
     StoreModule.forRoot({
       products: productsReducer,
-      product: productReducer
+      product: productReducer,
+      auth: authReducer
     }),
     EffectsModule.forRoot([ProductsEffects, ProductEffect, AuthEffect]),
     StoreDevtoolsModule.instrument({

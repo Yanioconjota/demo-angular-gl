@@ -7,7 +7,9 @@ import Swal, { SweetAlertIcon } from 'sweetalert2'
 })
 export class UiMessagesService {
 
-  constructor() { }
+  constructor() {
+    //
+  }
 
   validField(form: FormGroup, field: string) {
     return form.get(field)?.valid;
@@ -28,7 +30,7 @@ export class UiMessagesService {
       text: message,
       icon: icon,
       timer: timer,
-      confirmButtonText: 'Cool',
+      confirmButtonText: 'Ok',
     });
   }
 
